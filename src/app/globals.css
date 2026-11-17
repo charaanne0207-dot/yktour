@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* "Winter Grand Tour" — 아이보리·크림 기반 매거진 톤. 텍스트 대비 WCAG AA 이상 */
+:root {
+  --background: #f6f1e9;
+  --foreground: #231d19;
+  --card: #fffcf7;
+  --muted: #efe8dd;
+  --muted-foreground: #6b5f55;
+  --border: #e3d9ca;
+  --primary: #a9472f;
+  --primary-foreground: #ffffff;
+  --secondary: #1e4a72;
+  --tier-must: #a9472f;
+  --tier-recommended: #8a6912;
+  --tier-hidden: #4e5d24;
+  --success: #2f6b3a;
+  --danger: #a3261c;
+  --warning: #8a5a00;
+  --city-accent: var(--primary);
+  --shadow: 0 1px 2px rgb(35 29 25 / 0.04), 0 4px 16px rgb(35 29 25 / 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #171311;
+    --foreground: #f3ede6;
+    --card: #221d1a;
+    --muted: #2c2622;
+    --muted-foreground: #b6aa9e;
+    --border: #3a322d;
+    --primary: #e07c62;
+    --primary-foreground: #1a1210;
+    --secondary: #8bb8e0;
+    --tier-must: #c75a40;
+    --tier-recommended: #a07c1c;
+    --tier-hidden: #63762e;
+    --success: #7cc08a;
+    --danger: #f2867e;
+    --warning: #e3b45c;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-must: var(--tier-must);
+  --color-recommended: var(--tier-recommended);
+  --color-hidden: var(--tier-hidden);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-accent: var(--city-accent);
+  --font-serif: var(--font-playfair), "Noto Serif KR", Georgia, serif;
+  --font-sans: var(--font-inter), "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --shadow-soft: var(--shadow);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  line-height: 1.55;
+}
+
+* {
+  border-color: var(--border);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .input {
+    @apply h-11 rounded-xl border bg-card px-3 text-sm text-foreground outline-none transition-colors focus:border-primary;
+  }
+  /* 매거진 스타일 소제목 */
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground;
+  }
+  .section-title {
+    @apply font-serif text-[1.375rem] leading-tight md:text-2xl;
+    font-variant-numeric: lining-nums;
+  }
+  .surface {
+    @apply rounded-2xl border bg-card shadow-soft;
+  }
+}
+
+/* Playfair 기본 올드스타일 숫자 → 날짜·통계 가독성을 위해 라이닝 숫자 */
+.font-serif {
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
